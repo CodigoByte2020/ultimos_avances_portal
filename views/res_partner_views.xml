@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_partner_form_view_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="isep_sign_sale.res_partner_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='information_per']" position="after">
+                <page name="documents" string="Documentación" attrs="{'invisible': [('country_id', '=', False)]}">
+                    <field name="res_partner_document_ids" context="{'default_partner_id': id}">
+                        <tree editable="bottom">
+                            <field name="partner_id" invisible="1"/>
+                            <field name="document"/>
+                            <field name="filename"/>
+                            <field name="file" filename="filename"/>
+                            <field name="reason_for_observation"/>
+                            <field name="state"
+                                   widget="badge"
+                                   decoration-info="state == 'on_hold'"
+                                   decoration-success="state == 'accepted'"
+                                   decoration-warning="state == 'observed'"/>
+                            <button name="action_observe" type="object" string="Observar" class="btn btn-primary"/>
+                            <button name="action_accept" type="object" string="Aceptar" class="btn btn-primary"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+            <xpath expr="//field[@name='finalizacionestudios']" position="after">
+                <field name="birth_date"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

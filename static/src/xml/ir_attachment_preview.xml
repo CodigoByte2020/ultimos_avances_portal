@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="web.BinaryField" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('o_select_file_button')]" position="after">
+<!--            <t t-debug="pdb"/>-->
+            <t t-if="props.value and props.record.resModel == 'res.partner.document'">
+                <button class="btn btn-secondary fa fa-eye o_preview_file_button"
+                        data-tooltip="Edit"
+                        aria-label="Edit"
+                        t-on-click="_onFilePreview"/>
+            </t>
+        </xpath>
+    </t>
+</templates>
